@@ -3,11 +3,11 @@
 #include <string>
 #include <unordered_map>
 
-class Scene {
+class Level {
 public:
-    friend class SceneManager;
+    friend class LevelManager;
     
-    Scene() = default;  // trivial constructor to construct a NULL-like object
+    Level() = default;  // trivial constructor to construct a NULL-like object
 
     bool IsInited() const { return isInited_; }
     virtual void Init() {}
@@ -19,14 +19,14 @@ private:
     bool isInited_ = false;
 };
 
-class SceneManager {
+class LevelManager {
 public:
-    SceneManager() = default;
+    LevelManager() = default;
 
     template <typename SceneType>
     SceneType* Create(const std::string& name);
-    Scene* Find(const std::string& name);
-    Scene& GetCurScene();
+    Level* Find(const std::string& name);
+    Level& GetCurScene();
 
     void Update();
     void PostUpdate();
@@ -34,14 +34,14 @@ public:
     auto& GetAllScenes() const { return sceneMap_; }
 
 private:
-    std::unordered_map<std::string, std::unique_ptr<Scene>> sceneMap_;
-    static Scene null_;
-    Scene* curScene_ = nullptr;
-    Scene* changeDstScene_ = nullptr;
+    std::unordered_map<std::string, std::unique_ptr<Level>> sceneMap_;
+    static Level null_;
+    Level* curScene_ = nullptr;
+    Level* changeDstScene_ = nullptr;
 };
 
 template <typename SceneType>
-SceneType* SceneManager::Create(const std::string& name) {
+SceneType* LevelManager::Create(const std::string& name) {
     return static_cast<SceneType*>(
         sceneMap_.emplace(name, std::make_unique<SceneType>())
             .first->second.get());

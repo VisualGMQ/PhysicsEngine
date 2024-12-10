@@ -519,6 +519,19 @@ SMatrix<T, 4, 4> CreateXRotation(float radians) {
 }
 
 template <typename T>
+SMatrix<T, 2, 2> Create2DRotation(float radians) {
+    float cos = std::cos(radians);
+    float sin = std::sin(radians);
+    // clang-format off
+    return SMatrix<T, 2, 2>::FromRow(
+        cos, -sin,
+        sin,  cos
+    );
+    // clang-format on
+}
+
+
+template <typename T>
 SMatrix<T, 4, 4> CreateYRotation(float radians) {
     float cos = std::cos(radians);
     float sin = std::sin(radians);
@@ -538,7 +551,7 @@ SMatrix<T, 4, 4> CreateXYZRotation(const SVector<T, 3>& r) {
 }
 
 template <typename T>
-SMatrix<T, 2, 2> CreateRotation2D(float radians) {
+SMatrix<T, 2, 2> CreateRotation2D(T radians) {
     auto cos = std::cos(radians);
     auto sin = std::sin(radians);
     // clang-format off

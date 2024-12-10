@@ -1,8 +1,8 @@
-#include "scene.hpp"
+#include "level.hpp"
 
-Scene SceneManager::null_;
+Level LevelManager::null_;
 
-Scene* SceneManager::Find(const std::string& name) {
+Level* LevelManager::Find(const std::string& name) {
     auto it = sceneMap_.find(name);
     if (it == sceneMap_.end()) {
         return nullptr;
@@ -10,17 +10,17 @@ Scene* SceneManager::Find(const std::string& name) {
     return it->second.get();
 }
 
-Scene& SceneManager::GetCurScene() {
+Level& LevelManager::GetCurScene() {
     return curScene_ ? *curScene_ : null_;
 }
 
-void SceneManager::Update() {
+void LevelManager::Update() {
     if (curScene_) {
         curScene_->Update();
     }
 }
 
-bool SceneManager::ChangeScene(const std::string& name) {
+bool LevelManager::ChangeScene(const std::string& name) {
     auto it = sceneMap_.find(name);
     if (it != sceneMap_.end()) {
         changeDstScene_ = it->second.get();
@@ -29,7 +29,7 @@ bool SceneManager::ChangeScene(const std::string& name) {
     return false;
 }
 
-void SceneManager::PostUpdate() {
+void LevelManager::PostUpdate() {
     if (changeDstScene_) {
         if (curScene_) {
             curScene_->Quit();

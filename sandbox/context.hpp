@@ -1,11 +1,12 @@
 #pragma once
 
-#include "renderer.hpp"
-#include "scene.hpp"
-#include "window.hpp"
 #include "input/keyboard.hpp"
 #include "input/mouse.hpp"
+#include "level.hpp"
+#include "renderer.hpp"
+#include "scene.hpp"
 #include "timer.hpp"
+#include "window.hpp"
 
 class Context {
 public:
@@ -19,10 +20,11 @@ public:
 
     std::unique_ptr<Window> window;
     std::unique_ptr<Renderer> renderer;
-    std::unique_ptr<SceneManager> sceneMgr;
+    std::unique_ptr<LevelManager> sceneMgr;
     std::unique_ptr<Keyboard> keyboard;
     std::unique_ptr<Mouse> mouse;
     std::unique_ptr<Time> time;
+    PhysicsScene physics_scene;
     
     void Update();
 

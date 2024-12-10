@@ -28,9 +28,10 @@ void Context::postInit() {
     time = std::make_unique<Time>();
     keyboard = std::make_unique<Keyboard>();
     mouse = std::make_unique<Mouse>();
-    sceneMgr = std::make_unique<SceneManager>();
+    sceneMgr = std::make_unique<LevelManager>();
+    time->SetFpsLimit(120);
 
-    sceneMgr->Create<SandboxScene>("sandbox scene");
+    sceneMgr->Create<SandboxLevel>("sandbox scene");
     sceneMgr->ChangeScene("sandbox scene");
 }
 
@@ -69,6 +70,7 @@ void Context::Update() {
 
     renderer->Present();
     sceneMgr->PostUpdate();
+    physics_scene.Update(time->GetElapse() / 1000.0f);
 
     time->WaitForFps();
     time->EndRecordElapse();

@@ -305,26 +305,6 @@ public:
         return m;
     }
 
-    SMatrix() = default;
-
-    SMatrix(const SMatrix& o) : data_{o.data_} {}
-
-    SMatrix(SMatrix&& o) : data_{o.data_} {}
-
-    SMatrix& operator=(SMatrix&& o) {
-        if (&o != this) {
-            data_ = std::move(o.data_);
-        }
-        return *this;
-    }
-
-    SMatrix& operator=(const SMatrix& o) {
-        if (&o != this) {
-            data_ = o.data_;
-        }
-        return *this;
-    }
-
     template <typename... Ts>
     requires((std::convertible_to<Ts, ElemType> && ...) && sizeof...(Ts) >= 1)
     void SetValuesFromRow(Ts... elems) {

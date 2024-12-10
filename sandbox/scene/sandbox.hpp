@@ -1,7 +1,7 @@
 #pragma once
-#include "scene.hpp"
+#include "level.hpp"
 
-class SandboxScene: public Scene{
+class SandboxLevel: public Level{
 public:
     
     void Update() override;

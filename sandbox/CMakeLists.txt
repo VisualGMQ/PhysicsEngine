@@ -7,7 +7,6 @@ aux_source_directory(./scene SANDBOX_SRC)
 
 add_executable(sandbox ${SANDBOX_SRC} ${SANDBOX_HEADERS})
 target_link_libraries(sandbox PRIVATE physics_engine)
-target_compile_features(sandbox PRIVATE cxx_std_17)
 target_link_libraries(sandbox
     PRIVATE
     $<TARGET_NAME_IF_EXISTS:SDL2::SDL2main>

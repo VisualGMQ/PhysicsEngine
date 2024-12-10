@@ -41,7 +41,7 @@ public:
     static constexpr size_t SMOElemCount = 4 * 4;
 
     static Matrix Zeros(size_t col, size_t row) {
-        return {};
+        return {col, row};
     }
     
     static Matrix Identity(size_t col, size_t row) {
